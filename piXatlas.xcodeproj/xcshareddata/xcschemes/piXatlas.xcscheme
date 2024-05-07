@@ -61,20 +61,16 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-b 4 -m 5"
+            argument = "$(PROJECT_DIR)/examples/Atlas -b 4"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "$(PROJECT_DIR)/examples/Atlas"
+            argument = "$(PROJECT_DIR)/examples/Glyphs -b 4 -m 5"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "$(PROJECT_DIR)/examples/Glyphs"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
             argument = "-o $(PROJECT_DIR)/../pixelKit/pixelKit/C++/include/Glyphs.h"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
