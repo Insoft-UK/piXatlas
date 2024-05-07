@@ -62,11 +62,11 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "$(PROJECT_DIR)/examples/Atlas -b 4"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "$(PROJECT_DIR)/examples/Glyphs -b 4 -m 5"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-o $(PROJECT_DIR)/../pixelKit/pixelKit/C++/include/Glyphs.h"
