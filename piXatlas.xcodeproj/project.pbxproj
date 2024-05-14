@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		133669342BE82EA000484032 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 133669332BE82EA000484032 /* main.cpp */; };
 		133669432BE82F9100484032 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1336693F2BE82F9100484032 /* image.cpp */; };
+		13EE0F702BEEA8A5000FF54A /* Atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13EE0F6E2BEEA8A5000FF54A /* Atlas.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -73,6 +74,10 @@
 		13EE0F642BE99C1A000FF54A /* 36.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = 36.bmp; sourceTree = "<group>"; };
 		13EE0F652BE99C1A000FF54A /* 37.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = 37.bmp; sourceTree = "<group>"; };
 		13EE0F672BE99C22000FF54A /* example.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = example.bmp; sourceTree = "<group>"; };
+		13EE0F6A2BEC1AEF000FF54A /* Glyphs.atlas */ = {isa = PBXFileReference; lastKnownFileType = text; path = Glyphs.atlas; sourceTree = "<group>"; };
+		13EE0F6B2BEDB0F2000FF54A /* Glyphs.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Glyphs.bmp; sourceTree = "<group>"; };
+		13EE0F6E2BEEA8A5000FF54A /* Atlas.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Atlas.cpp; sourceTree = "<group>"; };
+		13EE0F6F2BEEA8A5000FF54A /* Atlas.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Atlas.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +113,7 @@
 		133669322BE82EA000484032 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				13EE0F6C2BEEA872000FF54A /* Classes */,
 				133669332BE82EA000484032 /* main.cpp */,
 				133669422BE82F9100484032 /* GFXAtlas.h */,
 				133669412BE82F9100484032 /* image.hpp */,
@@ -120,7 +126,9 @@
 		1336693E2BE82F5F00484032 /* examples */ = {
 			isa = PBXGroup;
 			children = (
+				13EE0F6B2BEDB0F2000FF54A /* Glyphs.bmp */,
 				13EE0F662BE99C1A000FF54A /* Glyphs */,
+				13EE0F6A2BEC1AEF000FF54A /* Glyphs.atlas */,
 				13EE0F3F2BE9680D000FF54A /* Glyphs.h */,
 				13EE0F682BE99C22000FF54A /* Atlas */,
 				13EE0F3E2BE83E3E000FF54A /* Atlas.h */,
@@ -179,6 +187,23 @@
 				13EE0F672BE99C22000FF54A /* example.bmp */,
 			);
 			path = Atlas;
+			sourceTree = "<group>";
+		};
+		13EE0F6C2BEEA872000FF54A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				13EE0F6D2BEEA882000FF54A /* include */,
+				13EE0F6E2BEEA8A5000FF54A /* Atlas.cpp */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		13EE0F6D2BEEA882000FF54A /* include */ = {
+			isa = PBXGroup;
+			children = (
+				13EE0F6F2BEEA8A5000FF54A /* Atlas.hpp */,
+			);
+			name = include;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13EE0F702BEEA8A5000FF54A /* Atlas.cpp in Sources */,
 				133669342BE82EA000484032 /* main.cpp in Sources */,
 				133669432BE82F9100484032 /* image.cpp in Sources */,
 			);

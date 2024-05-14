@@ -30,7 +30,7 @@ typedef struct __attribute__((__packed__)) {
     uint16_t width;
     uint16_t height;
     uint8_t bitWidth;
-    void *data;
+    uint8_t *data;
 } TImage;
 
 /**
@@ -124,4 +124,15 @@ TImage *extractImageSection(TImage *image);
  @param    maskColor Color that should be treated as transparent.
  */
 TImage *extractImageSectionMasked(TImage *image, uint8_t maskColor);
+
+/**
+ @brief    Takes an input image and identifies and extracts a section of the image that contains an actual image.
+ @param    image The input image from which a section containing an actual image will be grabed.
+ @param    maskColor Color that should be treated as transparent.
+ @param    x The start x-axis position from which the pixmap will grabed at.
+ @param    y The start y-axis position from which the pixmap will be grabed at.
+ @param    w The width of the pixmap section to grab.
+ @param    h The height of the pixmap section to grab.
+ */
+TImage *grabImageSectionMasked(TImage *image, uint8_t maskColor, uint16_t x, uint16_t y, uint16_t w, uint16_t h);
 

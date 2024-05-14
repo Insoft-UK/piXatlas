@@ -20,27 +20,46 @@
  THE SOFTWARE.
  */
 
-#ifndef GFXAtlas_h
-#define GFXAtlas_h
+#ifndef Atlas_hpp
+#define Atlas_hpp
 
-#ifndef color_t
-#define color_t unsigned char
-#endif
+#include <stdio.h>
+#include <stdint.h>
 
-typedef struct {
-    uint16_t bitmapOffset;  // Offset address to the bitmap data for this sprite.
-    uint8_t  width, height; // Bitmap dimensions in pixels.
-    color_t  maskColor;
-    int8_t   dX;            // Used to position the sprite in the horizontal direction.
-    int8_t   dY;            // Used to position the sprite in the vertical direction.
-} GFXtexture;
+#include <string>
+#include <vector>
 
-typedef struct {
-    color_t    *data;
-    GFXtexture *texture;   // Parameter block data.
-    uint8_t    _reserved;
-    uint8_t     textures;
-    uint8_t     bitWidth;  // Bits per pixel for color depth, typically 4 or 8.
-} GFXatlas;
+#include "GFXAtlas.h"
+#include "image.hpp"
 
-#endif /* GFXAtlas_h */
+class Atlas {
+private:
+    
+    std::vector<std::string> _textureEnteries;
+    std::vector<uint8_t> _data;
+    std::string _path, _name;
+    TImage *_image = nullptr;
+    GFXatlas _atlas;
+    
+    uint16_t concatenateImageData(TImage *image);
+    void imageNamed(const std::string &arguments);
+    void texture(const std::string &arguments);
+    void textures(const std::string &arguments);
+    void parseLine(const std::string& str);
+    std::string generateH(void);
+    void addTexture(GFXtexture &texture);
+    
+public:
+    Atlas(const GFXatlas &atlas, const std::string &name)
+    {
+        _atlas = atlas;
+        _name = name;
+    }
+    void proccessDirectory(const std::string &directory, int maskColor);
+    void proccessScript(const std::string &filename, int maskColor);
+    void createFile(std::string &filename);
+    
+    
+};
+
+#endif /* Atlas_hpp */

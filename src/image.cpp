@@ -165,7 +165,7 @@ TImage *createBitmap(int w, int h)
     }
     
     w = (w + 7) & ~7;
-    image->data = malloc(w * h / 8);
+    image->data = (uint8_t *)malloc(w * h / 8);
     if (!image->data) {
         free(image);
         return nullptr;
@@ -185,7 +185,7 @@ TImage *createPixmap(int w, int h)
         return nullptr;
     }
     
-    image->data = malloc(w * h);
+    image->data = (uint8_t *)malloc(w * h);
     if (!image->data) {
         free(image);
         return nullptr;
@@ -200,14 +200,21 @@ TImage *createPixmap(int w, int h)
 
 void copyPixmap(const TImage *dst, int dx, int dy, const TImage *src, int x, int y, uint16_t w, uint16_t h)
 {
+    if (!dst || !src)
+        return;
+    
+    if (!dst->data || !src->data)
+        return;
+    
     uint8_t *d = (uint8_t *)dst->data;
     uint8_t *s = (uint8_t *)src->data;
     
-    d += dx + dy * dst->width;
-    s += x + y * src->width;
-    while (h--) {
+    d += dx + dy * (int)dst->width;
+    s += x + y * (int)src->width;
+    
+    for (int j=0; j<h; j++) {
         for (int i=0; i<w; i++) {
-            d[i] = s[i];
+            dst->data[i + dx + (j + dy) * dst->width] = src->data[i + x + (j + y) * src->width];
         }
         d += dst->width;
         s += src->width;
@@ -226,7 +233,7 @@ TImage *convertMonochromeBitmapToPixmap(const TImage *monochrome)
     image->bitWidth = 8;
     image->width = monochrome->width;
     image->height = monochrome->height;
-    image->data = malloc(image->width * image->height);
+    image->data = (uint8_t *)malloc(image->width * image->height);
     if (!image->data) return image;
     
     memset(image->data, 0, image->width * image->height);
@@ -265,7 +272,7 @@ TImage *convertPixmapTo8BitPixmap(const TImage *pixmap)
     image->bitWidth = 8;
     image->width = pixmap->width;
     image->height = pixmap->height;
-    image->data = malloc(image->width * image->height);
+    image->data = (uint8_t *)malloc(image->width * image->height);
     if (!image->data) return image;
     
     memset(image->data, 0, image->width * image->height);
@@ -371,7 +378,7 @@ TImage *extractImageSectionMasked(TImage *image, uint8_t maskColor)
     
     for (int y=0; y<image->height; y++) {
         for (int x=0; x<image->width; x++) {
-            if (p[x + y * image->width] != maskColor) continue;
+            if (p[x + y * image->width] == maskColor) continue;
             if (minX > x) minX = x;
             if (maxX < x) maxX = x;
             if (minY > y) minY = y;

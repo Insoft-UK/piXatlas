@@ -66,6 +66,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "$(PROJECT_DIR)/examples/Glyphs -b 4 -m 5"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "$(PROJECT_DIR)/examples/Glyphs.atlas"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
