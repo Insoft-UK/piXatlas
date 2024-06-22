@@ -96,14 +96,21 @@ TImage *loadBMPGraphicFile(std::string &filename)
     
     image->width = abs(bip_header.biWidth);
     image->height = abs(bip_header.biHeight);
-    int32_t bytesPerRow = bip_header.biWidth / (8 / bip_header.biBitCount);
-    int32_t len = bytesPerRow * bip_header.biHeight;
+    size_t row_size = image->width / (8 / bip_header.biBitCount);
     
     infile.seekg(bip_header.biClrUsed * 4, std::ios_base::cur);
-    infile.read((char *)image->data, len);
+    for (int r = 0; r < image->height; ++r) {
+        infile.read((char *)&image->data[row_size * r], row_size);
+        if (infile.gcount() != row_size) {
+            std::cout << filename << " Read failed!\n";
+            break;
+        }
+        
+        // Deal with any padding if nessasary.
+        if (row_size % 4)
+            infile.seekg(4 - row_size % 4, std::ios_base::cur);
+    }
     
-    if (infile.gcount() != len)
-        std::cout << filename << " Read failed!\n";
     infile.close();
     
     if (bip_header.biHeight > 0)

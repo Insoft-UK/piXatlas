@@ -20,6 +20,8 @@
  THE SOFTWARE.
  */
 
+// Image Library C/C++ v1.0
+
 #pragma once
 
 #include <iostream>
@@ -29,7 +31,7 @@
 typedef struct __attribute__((__packed__)) {
     uint16_t width;
     uint16_t height;
-    uint8_t bitWidth;
+    uint8_t  bitWidth;
     uint8_t *data;
 } TImage;
 
