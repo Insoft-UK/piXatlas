@@ -109,9 +109,14 @@ TImage *loadBMPGraphicFile(const std::string &filename)
             break;
         }
         
-        // Deal with any padding if nessasary.
-        if (length % 6)
-            infile.seekg(length % 6, std::ios_base::cur);
+        /*
+         Each scan line is zero padded to the nearest 4-byte boundary.
+         
+         If the image has a width that is not divisible by four, say, 21 bytes, there
+         would be 3 bytes of padding at the end of every scan line.
+         */
+        if (length % 4)
+            infile.seekg(4 - length % 4, std::ios_base::cur);
     }
     
     infile.close();
