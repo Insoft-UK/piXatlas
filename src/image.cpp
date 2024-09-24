@@ -1,5 +1,7 @@
 /*
- Copyright © 2024 Insoft. All rights reserved.
+ The MIT License (MIT)
+ 
+ Copyright (c) 2024 Insoft. All rights reserved.
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -8,16 +10,16 @@
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
  
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
  
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
  */
 
 #include "image.hpp"
@@ -53,15 +55,16 @@ typedef struct __attribute__((__packed__)) {
 static void flipImageVertically(const TImage *image)
 {
     uint8_t *byte = (uint8_t *)image->data;
-    int w = (int)image->width;
+    int w = (int)image->width / (8 / image->bitWidth);
     int h = (int)image->height;
+    
     for (int row = 0; row < h / 2; ++row)
         for (int col = 0; col < w; ++col)
             std::swap(byte[col + row * w], byte[col + (h - 1 - row) * w]);
     
 }
 
-TImage *loadBMPGraphicFile(std::string &filename)
+TImage *loadBMPGraphicFile(const std::string &filename)
 {
     BIPHeader bip_header;
     
@@ -96,19 +99,19 @@ TImage *loadBMPGraphicFile(std::string &filename)
     
     image->width = abs(bip_header.biWidth);
     image->height = abs(bip_header.biHeight);
-    size_t row_size = image->width / (8 / bip_header.biBitCount);
+    size_t length = image->width / (8 / bip_header.biBitCount);
     
-    infile.seekg(bip_header.biClrUsed * 4, std::ios_base::cur);
+    infile.seekg(bip_header.fileHeader.bfOffBits, std::ios_base::beg);
     for (int r = 0; r < image->height; ++r) {
-        infile.read((char *)&image->data[row_size * r], row_size);
-        if (infile.gcount() != row_size) {
+        infile.read((char *)&image->data[length * r], length);
+        if (infile.gcount() != length) {
             std::cout << filename << " Read failed!\n";
             break;
         }
         
         // Deal with any padding if nessasary.
-        if (row_size % 4)
-            infile.seekg(4 - row_size % 4, std::ios_base::cur);
+        if (length % 6)
+            infile.seekg(length % 6, std::ios_base::cur);
     }
     
     infile.close();
@@ -119,7 +122,7 @@ TImage *loadBMPGraphicFile(std::string &filename)
     return image;
 }
 
-TImage *loadPBMGraphicFile(std::string &filename)
+TImage *loadPBMGraphicFile(const std::string &filename)
 {
     std::ifstream infile;
     
