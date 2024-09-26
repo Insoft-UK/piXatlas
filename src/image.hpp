@@ -1,5 +1,7 @@
 /*
- Copyright © 2024 Insoft. All rights reserved.
+ The MIT License (MIT)
+ 
+ Copyright (c) 2024 Insoft. All rights reserved.
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -8,19 +10,18 @@
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
  
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
  
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
  */
 
-// Image Library C/C++ v1.0
 
 #pragma once
 
@@ -40,14 +41,14 @@ typedef struct __attribute__((__packed__)) {
  @param    filename The filename of the Bitmap (BMP) to be loaded.
  @return   A structure containing the image data.
  */
-TImage *loadBMPGraphicFile(std::string &filename);
+TImage *loadBMPGraphicFile(const std::string &filename);
 
 /**
  @brief    Loads a file in the Portable Bitmap (PBM) format.
  @param    filename The filename of the Portable Bitmap (PBM) to be loaded.
  @return   A structure containing the image data.
  */
-TImage *loadPBMGraphicFile(std::string &filename);
+TImage *loadPBMGraphicFile(const std::string &filename);
 
 /**
  @brief    Creates a bitmap with the specified dimensions.
